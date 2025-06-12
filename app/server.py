@@ -28,16 +28,17 @@ async def upload_file(file: UploadFile):
     await save_to_disk(file=await file.read(), path=file_path)
 
     # Push to Redis queue
-    q.enqueue(process_file, str(db_file.inserted_id))
+    q.enqueue(process_file, str(db_file.inserted_id), file_path)
     # the above returns a Job object, which is used to track pushed to queue,
     # out of queue, etc.
 
-    await files_collection.update_one({
-        "_id": db_file.inserted_id
-    }, {
-        "$set": {
-            "status": "queued",
-        }
-    })
+    await files_collection.update_one(
+        {
+            "_id": db_file.inserted_id
+        }, {
+            "$set": {
+                "status": "queued",
+            }
+        })
 
     return {"file_id": str(db_file.inserted_id)}
