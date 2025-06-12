@@ -5,6 +5,10 @@ description = "A fully functional RAG application"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "aiofiles>=24.1.0",
     "fastapi>=0.115.12",
+    "pymongo>=4.13.1",
+    "python-multipart>=0.0.20",
+    "rq>=2.3.3",
     "uvicorn>=0.34.3",
 ]

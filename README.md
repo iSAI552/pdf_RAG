@@ -1,0 +1,1 @@
+To run the workers use the command: rq worker --with-scheduler --url redis://valkey:6379
