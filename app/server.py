@@ -1,10 +1,11 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile, Path
 # from uuid import uuid4
 from .utils.file import save_to_disk
 from .db.collections.files import files_collection
 from .db.collections.files import FileSchema
 from .queue.q import q
 from .queue.workers import process_file
+from bson import ObjectId
 
 
 app = FastAPI()
@@ -42,3 +43,15 @@ async def upload_file(file: UploadFile):
         })
 
     return {"file_id": str(db_file.inserted_id)}
+
+# flake8: noqa,this removes lint errors
+@app.get("/files/{id}")
+async def get_file_by_id(id: str = Path(..., description="The ID of the file to retrieve")):
+    db_file = await files_collection.find_one({"_id": ObjectId(id)})
+
+    return {
+        "id": str(db_file["_id"]),
+        "name": db_file["name"],
+        "status": db_file["status"],
+        "result": db_file.get("result", None)
+    }
