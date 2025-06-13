@@ -69,7 +69,9 @@ async def process_file(id: str, file_path: str):
                         {
                             "type": "input_text",
                             "text": (
-                                "Extract the text from the resume image."
+                                "Based on the resume provide me what are the strong points and what are the weak points of the resume. "
+                                "Also provide me the skills that are mentioned in the resume. "
+                                "Also provide me the summary of the resume. "
                             ),
                         },
                         {
