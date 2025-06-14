@@ -61,7 +61,7 @@ async def process_file(id: str, file_path: str):
 
         images_base64 = [encode_image_to_base64(img) for img in images]
         result = client.responses.create(
-            model="gpt-4",
+            model="gpt-4.1",
             input=[
                 {
                     "role": "user",
