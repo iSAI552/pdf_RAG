@@ -13,7 +13,8 @@ services:
     volumes:
       - valkey_data:/usr/local/etc/valkey
 
-  app:
+  worker:
+    command: ['uv', 'run', 'rq', 'worker', '--with-scheduler', '--url', 'redis://valkey:6379']
     build: 
       dockerfile: Dockerfile
       context: .
