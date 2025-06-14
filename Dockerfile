@@ -17,7 +17,6 @@ COPY pyproject.toml uv.lock /app/
 RUN uv sync --frozen --no-cache
 
 # Set environment variable for OpenAI API key (override at runtime for security)
-ENV OPENAI_API_KEY='your_openai_api_key_here'
 
 # Run the application.
 CMD ["uv", "run", "uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]
