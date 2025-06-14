@@ -23,7 +23,7 @@ services:
       - 8000:8000
 
   worker:
-    command: ['rq', 'worker', '--with-scheduler', '--url', 'redis://valkey:6379']
+    command: ['uv', 'run', 'rq', 'worker', '--with-scheduler', '--url', 'redis://valkey:6379']
     build: 
       dockerfile: Dockerfile
       context: .
